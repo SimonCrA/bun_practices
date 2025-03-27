@@ -105,15 +105,14 @@ const server = serve({
           return new Response("Invalid model ID", { status: 400 });
         }
 
-
         const result = dbConn
           .prepare(`DELETE FROM models WHERE model_id = ?`)
           .run(queryParams.model_id);
 
-        if(result.changes == 0){
-            return new Response("Not found", {
-              status: 404,
-            });
+        if (result.changes == 0) {
+          return new Response("Not found", {
+            status: 404,
+          });
         }
 
         return Response.json(result);
